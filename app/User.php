@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email' //, 'password',
     ];
 
     /**
@@ -24,16 +24,26 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+    /*protected $hidden = [
         'password', 'remember_token',
-    ];
+    ];*/
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
+    /*protected $casts = [
         'email_verified_at' => 'datetime',
-    ];
+    ];*/
+
+    public function certificates()
+    {
+        return $this->belongsToMany('App\Certificate')->withTimestamps();  //created_at will give us datetime of award
+    }
+
+    public function contexts()
+    {
+        return $this->belongsToMany('App\Context')->withTimestamps();
+    }
 }
